@@ -1,0 +1,205 @@
+.container {
+    min-height: 100vh;
+    padding: 2rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .darkMode {
+    background-color: var(--background);
+    color: var(--text);
+  }
+  
+  .lightMode {
+    background-color: var(--text);
+    color: var(--background);
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .header h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(to right, var(--primary), var(--primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .themeToggle {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .themeToggle:hover {
+    background-color: var(--surface);
+  }
+  
+  .searchBar {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .searchInput {
+    flex: 1;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--surface);
+    background-color: var(--surface);
+    color: var(--text);
+    font-size: 1rem;
+  }
+  
+  .searchButton {
+    padding: 0 1.5rem;
+    background-color: var(--primary);
+    color: var(--text);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .searchButton:hover {
+    background-color: var(--primary-dark);
+  }
+  
+  .movieGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+  
+  .movieCard {
+    background-color: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .movieCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .movieCard img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  
+  .movieInfo {
+    padding: 1rem;
+  }
+  
+  .movieInfo h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  
+  .movieInfo p {
+    margin: 0.5rem 0;
+    color: var(--text-secondary);
+  }
+  
+  .rating {
+    color: var(--primary) !important;
+    font-weight: bold;
+  }
+  
+  .movieDetail {
+    background-color: var(--surface);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  
+  .backButton {
+    background-color: var(--primary);
+    color: var(--text);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+  
+  .detailContent {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
+  }
+  
+  .detailContent img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .detailInfo h2 {
+    margin: 0 0 1rem 0;
+    font-size: 2rem;
+    color: var(--text);
+  }
+  
+  .overview {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 1rem 0;
+  }
+  
+  .genres {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+  
+  .genre {
+    background-color: var(--primary-dark);
+    color: var(--text);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .cast h3 {
+    color: var(--text);
+    margin: 1rem 0 0.5rem 0;
+  }
+  
+  .cast p {
+    color: var(--text-secondary);
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+  
+    .detailContent {
+      grid-template-columns: 1fr;
+    }
+  
+    .header h1 {
+      font-size: 2rem;
+    }
+  
+    .movieGrid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+  
+    .movieCard img {
+      height: 225px;
+    }
+  }
