@@ -23,19 +23,58 @@ export default function Home() {
           poster: "https://images.pexels.com/photos/2873486/pexels-photo-2873486.jpeg",
           overview: "A thief who enters the dreams of others to steal secrets from their subconscious.",
           genre: ["Action", "Sci-Fi"],
-          cast: ["Leonardo DiCaprio", "Ellen Page"]
+          cast: ["Leonardo DiCaprio", "Ellen Page", "Joseph Gordon-Levitt", "Tom Hardy"]
         },
-        // Add more mock movies
         {
-            id: 1,
-            title: "Inception",
-            year: 2010,
-            rating: 8.8,
-            poster: "https://images.pexels.com/photos/2873486/pexels-photo-2873486.jpeg",
-            overview: "A thief who enters the dreams of others to steal secrets from their subconscious.",
-            genre: ["Action", "Sci-Fi"],
-            cast: ["Leonardo DiCaprio", "Ellen Page"]
-          },
+          id: 2,
+          title: "The Shawshank Redemption",
+          year: 1994,
+          rating: 9.3,
+          poster: "https://images.pexels.com/photos/1022692/pexels-photo-1022692.jpeg",
+          overview: "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+          genre: ["Drama"],
+          cast: ["Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler"]
+        },
+        {
+          id: 3,
+          title: "The Dark Knight",
+          year: 2008,
+          rating: 9.0,
+          poster: "https://images.pexels.com/photos/2850287/pexels-photo-2850287.jpeg",
+          overview: "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+          genre: ["Action", "Crime", "Drama"],
+          cast: ["Christian Bale", "Heath Ledger", "Aaron Eckhart", "Michael Caine"]
+        },
+        {
+          id: 4,
+          title: "Pulp Fiction",
+          year: 1994,
+          rating: 8.9,
+          poster: "https://images.pexels.com/photos/2874752/pexels-photo-2874752.jpeg",
+          overview: "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+          genre: ["Crime", "Drama"],
+          cast: ["John Travolta", "Samuel L. Jackson", "Uma Thurman", "Bruce Willis"]
+        },
+        {
+          id: 5,
+          title: "Interstellar",
+          year: 2014,
+          rating: 8.6,
+          poster: "https://images.pexels.com/photos/1169754/pexels-photo-1169754.jpeg",
+          overview: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+          genre: ["Adventure", "Drama", "Sci-Fi"],
+          cast: ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain", "Michael Caine"]
+        },
+        {
+          id: 6,
+          title: "The Matrix",
+          year: 1999,
+          rating: 8.7,
+          poster: "https://images.pexels.com/photos/2085832/pexels-photo-2085832.jpeg",
+          overview: "A computer programmer discovers that reality as he knows it is a simulation created by machines, and joins a rebellion to break free.",
+          genre: ["Action", "Sci-Fi"],
+          cast: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss", "Hugo Weaving"]
+        }
       ];
       setTrendingMovies(mockTrending);
     };
@@ -45,21 +84,20 @@ export default function Home() {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    // Replace with actual API call
-    const mockResults = [
-      {
-        id: 2,
-        title: searchQuery,
-        year: 2024,
-        rating: 7.5,
-        poster: "https://images.pexels.com/photos/3945317/pexels-photo-3945317.jpeg",
-        overview: "A fascinating movie about...",
-        genre: ["Drama"],
-        cast: ["Actor 1", "Actor 2"]
-      },
-      // Add more mock results
-    ];
-    setMovies(mockResults);
+    if (!searchQuery.trim()) {
+      setMovies([]);
+      return;
+    }
+
+    const searchTerm = searchQuery.toLowerCase();
+    const filteredMovies = trendingMovies.filter(movie => 
+      movie.title.toLowerCase().includes(searchTerm) ||
+      movie.overview.toLowerCase().includes(searchTerm) ||
+      movie.genre.some(g => g.toLowerCase().includes(searchTerm)) ||
+      movie.cast.some(c => c.toLowerCase().includes(searchTerm))
+    );
+    
+    setMovies(filteredMovies);
   };
 
   const toggleDarkMode = () => {
