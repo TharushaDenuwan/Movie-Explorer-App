@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Movie Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+Movie Explorer is a web application that allows users to search for movies, browse trending movies, and view detailed information about specific films, including their cast and genres. The application fetches movie data from The Movie Database (TMDb) API. It also incorporates features like dark/light mode.
 
-In the project directory, you can run:
+## Project Setup
 
-### `npm start`
+To run this project locally, follow these steps:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository_url>
+    cd <project_directory>
+    ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2.  **Install dependencies:**
+    Make sure you have Node.js and npm (or yarn) installed on your system. Then, run:
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
 
-### `npm test`
+3.  **Set up Environment Variables:**
+    Create a `.env` file in the root of your project and add your TMDb API key:
+    ```env
+    REACT_APP_TMDB_API_KEY=YOUR_TMDB_API_KEY
+    ```
+    *(Replace `YOUR_TMDB_API_KEY` with your actual API key from [https://www.themoviedb.org/settings/api](https://www.themoviedb.org/settings/api))*
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4.  **Start the development server:**
+    ```bash
+    npm start
+    # or
+    yarn start
+    ```
+    This will start the application, and you can usually view it in your browser at `http://localhost:3000`.
 
-### `npm run build`
+## API Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This project utilizes the [The Movie Database (TMDb) API](https://developers.themoviedb.org/3/) to fetch movie-related data. The following API endpoints are used:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* `/trending/movie/week`: Retrieves a list of movies trending this week.
+* `/search/movie`: Searches for movies based on a query.
+* `/movie/{movie_id}`: Retrieves detailed information about a specific movie.
+* `/movie/{movie_id}/credits`: Retrieves the cast of a specific movie.
+* `/genre/movie/list`: Retrieves a list of movie genres.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The following API key is required and should be placed in the `.env` file as `REACT_APP_TMDB_API_KEY`:
 
-### `npm run eject`
+* **API Key:** You need to create an account on TMDb and obtain an API key from your account settings.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The application uses the `axios` library to make HTTP requests to the TMDb API. Image URLs are constructed using the `IMAGE_BASE_URL` and different `posterSizes` defined in the code.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Features Implemented
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The Movie Explorer application includes the following features:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+* **Movie Search:** Users can search for movies by title using a search bar. The application displays a list of matching movies with their posters, titles, and release years.
+* **Trending Movies:** The homepage displays a section showcasing movies that are currently trending.
+* **Movie Details:** Clicking on a movie card takes the user to a detailed view of the movie, including:
+    * Poster and backdrop image (if available)
+    * Title and release year
+    * User rating
+    * Genres
+    * Overview/Synopsis
+    * Top 10 cast members
+* **Dark/Light Mode:** Users can toggle between a dark and light theme for a more comfortable viewing experience. The selected theme is persisted in the browser's local storage.
+* **Local Storage Persistence:**
+    * **Dark Mode Preference:** The user's chosen dark/light mode setting is saved in local storage and applied on subsequent visits.
+* **Infinite Scrolling (Search Results):** When searching for movies, the application implements infinite scrolling, loading more results as the user scrolls down the page.
+* **Error Handling:** The application displays informative error messages if API requests fail.
+* **Loading States:** Visual loading indicators are shown while data is being fetched from the API.
+* **Responsive Design:** The layout is designed to be reasonably responsive across different screen sizes.
 
-## Learn More
+## Libraries Used
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* **React:** A JavaScript library for building user interfaces.
+* **Axios:** A promise-based HTTP client for making API requests.
+* **Lucide React:** A library of beautiful SVG icons.
+* **React Router DOM:** For handling navigation within the application (though not explicitly shown in the provided code, it's a common library for multi-page React applications).
+* **CSS Modules:** Used for styling components with local scope.
