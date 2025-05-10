@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Style from './login.module.css';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // <-- this is what lets us navigate
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic here
+
+    // Navigate to /home
+    navigate('/home');
   };
 
   return (

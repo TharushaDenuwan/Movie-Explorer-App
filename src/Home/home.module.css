@@ -1,210 +1,495 @@
 body{
+  background-color: #121212;
   font-family: 'Poppins', sans-serif;
-
 }
 
 .container {
-    min-height: 100vh;
-    padding: 2rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .darkMode {
-    background-color: var(--background);
-    color: var(--text);
-  }
-  
-  .lightMode {
-    background-color: var(--text);
-    color: var(--background);
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
-  
-  .header h1 {
-    font-size: 2.5rem;
-    background: linear-gradient(to right, var(--primary), var(--primary-dark));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  .themeToggle {
-    background: none;
-    border: none;
-    color: var(--primary);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-  }
-  
-  .themeToggle:hover {
-    background-color: var(--surface);
-  }
-  
-  .searchBar {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-  
-  .searchInput {
-    flex: 1;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid var(--surface);
-    background-color: var(--surface);
-    color: var(--text);
-    font-size: 1rem;
-  }
-  
-  .searchButton {
-    padding: 0 1.5rem;
-    background-color: var(--primary);
-    color: var(--text);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .searchButton:hover {
-    background-color: var(--primary-dark);
-  }
-  
+  min-height: 100vh;
+  padding: 0 16px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.darkMode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+.lightMode {
+  background-color: #f5f5f5;
+  color: #121212;
+}
+
+.header {
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoIcon {
+  width: 28px;
+  height: 28px;
+  color: #e50914;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.themeToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  transition: background-color 0.2s;
+}
+
+.themeToggle:hover {
+  background-color: rgba(128, 128, 128, 0.2);
+}
+
+.darkMode .themeToggle {
+  color: #f5f5f5;
+}
+
+.lightMode .themeToggle {
+  color: #121212;
+}
+
+.searchBar {
+  max-width: 800px;
+  margin: 0 auto 32px;
+  display: flex;
+  position: relative;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-color: rgba(128, 128, 128, 0.1);
+  color: inherit;
+  transition: all 0.3s;
+}
+
+.darkMode .searchInput {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.lightMode .searchInput {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #e50914;
+  box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.2);
+}
+
+.searchButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trending, .searchResults {
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.trending h2, .searchResults h2 {
+  font-size: 24px;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.movieGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
   .movieGrid {
-    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 2rem;
-    margin-top: 1rem;
+    gap: 24px;
   }
-  
-  .movieCard {
-    background-color: var(--surface);
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  
-  .movieCard:hover {
-    transform: translateY(-5px);
-  }
-  
-  .movieCard img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-  }
-  
-  .movieInfo {
-    padding: 1rem;
-  }
-  
-  .movieInfo h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    color: var(--text);
-  }
-  
-  .movieInfo p {
-    margin: 0.5rem 0;
-    color: var(--text-secondary);
-  }
-  
-  .rating {
-    color: var(--primary) !important;
-    font-weight: bold;
-  }
-  
-  .movieDetail {
-    background-color: var(--surface);
-    border-radius: 12px;
-    padding: 2rem;
-  }
-  
-  .backButton {
-    background-color: var(--primary);
-    color: var(--text);
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-bottom: 1rem;
-  }
-  
+}
+
+.movieCard {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  background-color: #1f1f1f;
+}
+
+.darkMode .movieCard {
+  background-color: #1f1f1f;
+}
+
+.lightMode .movieCard {
+  background-color: white;
+}
+
+.movieCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.movieCard img {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  display: block;
+}
+
+.movieInfo {
+  padding: 12px;
+}
+
+.movieInfo h3 {
+  font-size: 16px;
+  margin: 0 0 4px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movieInfo p {
+  margin: 0;
+  font-size: 14px;
+  color: #999;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+.movieDetail {
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  position: relative;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  border-radius: 16px;
+}
+
+.backdropOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
+  border-radius: 16px;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-bottom: 24px;
+  transition: background-color 0.2s;
+}
+
+.backButton:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.backIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.detailContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  z-index: 1;
+  position: relative;
+  padding-top: 24px;
+}
+
+@media (min-width: 768px) {
   .detailContent {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 2rem;
+    flex-direction: row;
+    align-items: flex-start;
   }
-  
-  .detailContent img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
+}
+
+.posterContainer {
+  flex-shrink: 0;
+}
+
+.detailPoster {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 768px) {
+  .detailPoster {
+    width: 300px;
   }
-  
-  .detailInfo h2 {
-    margin: 0 0 1rem 0;
-    font-size: 2rem;
-    color: var(--text);
+}
+
+.detailInfo {
+  flex: 1;
+}
+
+.detailInfo h2 {
+  font-size: 28px;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.year {
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.starIcon {
+  width: 20px;
+  height: 20px;
+  color: #fbbf24;
+  fill: #fbbf24;
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.genre {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: rgba(229, 9, 20, 0.1);
+  color: #e50914;
+}
+
+.darkMode .genre {
+  background-color: rgba(229, 9, 20, 0.2);
+}
+
+.overview, .cast {
+  margin-bottom: 24px;
+}
+
+.overview h3, .cast h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.overview p, .cast p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.noResults {
+  text-align: center;
+  padding: 40px 0;
+  font-size: 18px;
+  color: #666;
+}
+
+.darkMode .noResults {
+  color: #999;
+}
+
+.endMessage {
+  text-align: center;
+  margin-top: 24px;
+  font-style: italic;
+  color: #666;
+}
+
+.darkMode .endMessage {
+  color: #999;
+}
+
+
+/* Adding transition effects to various elements */
+.container {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.searchBar {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.searchInput {
+  transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+.searchButton {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Smooth effect for dark/light mode toggle */
+.themeToggle {
+  transition: transform 0.3s ease;
+}
+
+.movieGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  transition: transform 0.3s ease;
+}
+
+/* Smooth effect on movie details */
+.movieDetail {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+/* Fade-in effect for movie detail view */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
-  
-  .overview {
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin: 1rem 0;
+}
+
+/* Smooth hover effect for movie cards */
+.movieCard {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movieCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Smooth transition for backdrop */
+.backdrop {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.backdropOverlay {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.backdropOverlay:hover {
+  opacity: 0.7;
+}
+
+/* Smooth transition for movie details poster */
+.detailPoster {
+  transition: transform 0.3s ease;
+}
+
+.detailPoster:hover {
+  transform: scale(1.05);
+}
+
+/* Search results and trending movies section transition */
+.searchResults, .trending {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+/* Loading spinner and error message transitions */
+.loadingSpinner,
+.errorMessage {
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+.noResults {
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+.endMessage {
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+/* Button hover effect */
+button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+/* Smooth transition for backdrop and movie content */
+.detailContent {
+  transition: transform 0.3s ease;
+}
+
+.detailContent:hover {
+  transform: translateY(-10px);
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
-  
-  .genres {
-    display: flex;
-    gap: 0.5rem;
-    margin: 1rem 0;
-  }
-  
-  .genre {
-    background-color: var(--primary-dark);
-    color: var(--text);
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-  }
-  
-  .cast h3 {
-    color: var(--text);
-    margin: 1rem 0 0.5rem 0;
-  }
-  
-  .cast p {
-    color: var(--text-secondary);
-  }
-  
-  @media (max-width: 768px) {
-    .container {
-      padding: 1rem;
-    }
-  
-    .detailContent {
-      grid-template-columns: 1fr;
-    }
-  
-    .header h1 {
-      font-size: 2rem;
-    }
-  
-    .movieGrid {
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 1rem;
-    }
-  
-    .movieCard img {
-      height: 225px;
-    }
-  }
+}
